@@ -1,0 +1,8 @@
+.settings/*
+.gradle/*
+bin/*
+build/*
+config/*
+playdb.properties
+
+!org.eclipse.jpt.entitygen.mysql---footballdb.nfl plays db

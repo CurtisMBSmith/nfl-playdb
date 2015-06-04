@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan("nfl.playdb")
-@PropertySource(value={"classpath:application.properties"})
+@PropertySource(value={"classpath:playdb.properties"})
 @EnableJpaRepositories(basePackages={"nfl.playdb.dao"})
 @EnableTransactionManagement
 public class NFLDataAnalyzerConfig {
