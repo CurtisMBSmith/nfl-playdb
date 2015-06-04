@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="nfl-playdb">
+		<class>nfl.playdb.model.gen.Koff</class>
+		<class>nfl.playdb.model.gen.Block</class>
+		<class>nfl.playdb.model.gen.Conv</class>
+		<class>nfl.playdb.model.gen.Defense</class>
+		<class>nfl.playdb.model.gen.Drive</class>
+		<class>nfl.playdb.model.gen.Fgxp</class>
+		<class>nfl.playdb.model.gen.Fumble</class>
+		<class>nfl.playdb.model.gen.Game</class>
+		<class>nfl.playdb.model.gen.Intercpt</class>
+		<class>nfl.playdb.model.gen.Kicker</class>
+		<class>nfl.playdb.model.gen.Offense</class>
+		<class>nfl.playdb.model.gen.Oline</class>
+		<class>nfl.playdb.model.gen.Pass</class>
+		<class>nfl.playdb.model.gen.Penalty</class>
+		<class>nfl.playdb.model.gen.Play</class>
+		<class>nfl.playdb.model.gen.Player</class>
+		<class>nfl.playdb.model.gen.Punt</class>
+		<class>nfl.playdb.model.gen.Redzone</class>
+		<class>nfl.playdb.model.gen.Rush</class>
+		<class>nfl.playdb.model.gen.Sack</class>
+		<class>nfl.playdb.model.gen.Safety</class>
+		<class>nfl.playdb.model.gen.Tackle</class>
+		<class>nfl.playdb.model.gen.Team</class>
+	</persistence-unit>
+</persistence>
