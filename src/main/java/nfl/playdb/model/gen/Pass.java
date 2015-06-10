@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Pass.findAll", query="SELECT p FROM Pass p")
 public class Pass implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private byte comp;
 	private String loc;
 	private byte spk;
@@ -29,6 +30,16 @@ public class Pass implements Serializable {
 	private Player defender;
 
 	public Pass() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -78,7 +89,6 @@ public class Pass implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Punt.findAll", query="SELECT p FROM Punt p")
 public class Punt implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private byte pfc;
 	private byte pgro;
 	private byte pnet;
@@ -28,6 +29,16 @@ public class Punt implements Serializable {
 	private Player puntReturner;
 
 	public Punt() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -77,7 +88,6 @@ public class Punt implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

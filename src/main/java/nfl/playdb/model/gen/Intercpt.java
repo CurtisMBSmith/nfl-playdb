@@ -18,12 +18,23 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Intercpt.findAll", query="SELECT i FROM Intercpt i")
 public class Intercpt implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private byte iry;
 	private Play play;
 	private Player interceptor;
 	private Player passer;
 
 	public Intercpt() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -37,7 +48,6 @@ public class Intercpt implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

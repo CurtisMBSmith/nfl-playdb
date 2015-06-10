@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Conv.findAll", query="SELECT c FROM Conv c")
 public class Conv implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private String type;
 	private Play play;
 	private Player convPasser;
@@ -25,6 +26,16 @@ public class Conv implements Serializable {
 	private Player convTarget;
 
 	public Conv() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -38,7 +49,6 @@ public class Conv implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

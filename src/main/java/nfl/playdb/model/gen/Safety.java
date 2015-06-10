@@ -18,15 +18,25 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Safety.findAll", query="SELECT s FROM Safety s")
 public class Safety implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private Play play;
 	private Player defender;
 
 	public Safety() {
 	}
 
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
+	}
+
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

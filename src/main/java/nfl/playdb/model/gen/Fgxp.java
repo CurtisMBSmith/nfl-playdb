@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Fgxp.findAll", query="SELECT f FROM Fgxp f")
 public class Fgxp implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private byte dist;
 	private String fgxp;
 	private byte good;
@@ -25,6 +26,16 @@ public class Fgxp implements Serializable {
 	private Player kicker;
 
 	public Fgxp() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -56,7 +67,6 @@ public class Fgxp implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

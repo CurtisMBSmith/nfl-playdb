@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Fumble.findAll", query="SELECT f FROM Fumble f")
 public class Fumble implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private Play play;
 	private Player fumbler;
 	private Player recoverer;
@@ -26,9 +27,18 @@ public class Fumble implements Serializable {
 	public Fumble() {
 	}
 
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
+	}
+
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

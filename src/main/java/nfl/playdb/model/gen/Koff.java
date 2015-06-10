@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Koff.findAll", query="SELECT k FROM Koff k")
 public class Koff implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private byte kgro;
 	private byte knet;
 	private byte kry;
@@ -27,6 +28,16 @@ public class Koff implements Serializable {
 	private Player kickReturner;
 
 	public Koff() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -67,7 +78,6 @@ public class Koff implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

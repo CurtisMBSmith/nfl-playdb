@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Block.findAll", query="SELECT b FROM Block b")
 public class Block implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private Play play;
 	private Player blocker;
 	private Player blockRecoverer;
@@ -25,9 +26,18 @@ public class Block implements Serializable {
 	public Block() {
 	}
 
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
+	}
+
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {

@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @NamedQuery(name="Rush.findAll", query="SELECT r FROM Rush r")
 public class Rush implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int pid;
 	private String dir;
 	private byte kne;
 	private byte succ;
@@ -26,6 +27,16 @@ public class Rush implements Serializable {
 	private Player ballCarrier;
 
 	public Rush() {
+	}
+
+	@Id
+	public int getPid() {
+		return pid;
+	}
+
+
+	public void setPid(final int pid) {
+		this.pid = pid;
 	}
 
 
@@ -66,7 +77,6 @@ public class Rush implements Serializable {
 
 
 	//bi-directional one-to-one association to Play
-	@Id
 	@OneToOne
 	@JoinColumn(name="pid", referencedColumnName="pid")
 	public Play getPlay() {
