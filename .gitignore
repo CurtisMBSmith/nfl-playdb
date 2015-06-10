@@ -1,7 +1,7 @@
-.settings/*
-.gradle/*
-bin/*
-build/*
+/build/
+/bin/
+/.settings/
+/.gradle/
 config/*
 playdb.properties
 
