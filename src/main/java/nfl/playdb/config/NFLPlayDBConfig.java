@@ -12,34 +12,57 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 //@ComponentScan("nfl.playdb")
 @PropertySource(value={"file:config/playdb/playdb.properties"})
 @EnableTransactionManagement
-public class NFLPlayDBConfig {
+public abstract class NFLPlayDBConfig {
 
 	@Autowired
 	Environment env;
 
+	@Value("${spring.datasource.username}")
+	private String username;
+
+	@Value("${spring.datasource.password}")
+	private String password;
+
+	@Value("${spring.datasource.url}")
+	private String url;
+
+	@Value("${spring.datasource.driver}")
+	private String driver;
+
 	@Bean
-	public PropertySourcesPlaceholderConfigurer properties() {
+	public static PropertySourcesPlaceholderConfigurer properties() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
 	@Bean
-	public DataSource dataSource(@Value("${spring.datasource.url}") final String url,
-			@Value("${spring.datasource.username}") final String username,
-			@Value("${spring.datasource.password}") final String password,
-			@Value("${spring.datasource.driver}") final String driver) throws Exception {
+	public DataSource dataSource() throws Exception {
 		final Properties props = new Properties();
-		props.put("url", url);
-		props.put("username", username);
-		props.put("password", password);
-		props.put("driverClassName", driver);
+		props.put("url", this.url);
+		props.put("username", this.username);
+		props.put("password", this.password);
+		props.put("driverClassName", this.driver);
 		final DataSource ds = BasicDataSourceFactory.createDataSource(props);
 
 		return ds;
+	}
+
+	@Bean
+	public DataSourceTransactionManager transactionManager() throws Exception {
+		final DataSourceTransactionManager txnMgr = new DataSourceTransactionManager(dataSource());
+		return txnMgr;
+	}
+
+	@Bean
+	public TransactionAwareDataSourceProxy transactionAwareDataSource() throws Exception {
+		final TransactionAwareDataSourceProxy txnAwareDSProxy = new TransactionAwareDataSourceProxy(dataSource());
+		return txnAwareDSProxy;
 	}
 }
