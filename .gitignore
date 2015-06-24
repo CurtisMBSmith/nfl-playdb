@@ -2,6 +2,7 @@
 /bin/
 /.settings/
 /.gradle/
+/deprecated/
 config/*
 playdb.properties
 
