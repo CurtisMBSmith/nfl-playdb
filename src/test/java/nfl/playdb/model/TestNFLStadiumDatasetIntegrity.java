@@ -6,6 +6,7 @@ import java.util.List;
 
 import nfl.playdb.config.NFLPlayDBConfig;
 import nfl.playdb.dao.GameDAO;
+import nfl.playdb.dao.TeamDAO;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +21,21 @@ public class TestNFLStadiumDatasetIntegrity {
 	@Autowired
 	private GameDAO gameDAO;
 
+	@Autowired
+	private TeamDAO teamDAO;
+
 	@Test
 	public void verifyAllStadiumsInDatasetHaveEnumValue() {
 		final List<String> stadiumsInDataSet = gameDAO.findDistinctStadiumNames();
-		assertFalse("One or more stadiums in dataset don't have a corrseponding enum value.",
+		assertFalse("One or more stadiums in dataset doesn't have a corrseponding enum value.",
 				stadiumsInDataSet.stream().anyMatch((stad) -> Stadium.fromString(stad) == null));
+	}
+
+	@Test
+	public void verifyAllTeamAbbreviationsInDatasetHaveEnumValue() {
+		final List<String> teamsInDataSet = teamDAO.findDistinctTeamAbbreviations();
+		assertFalse("One or more teams in dataset doesn't have a corrseponding enum value.",
+				teamsInDataSet.stream().anyMatch((team) -> NFLTeam.fromAbbrev(team) == null));
 	}
 
 }

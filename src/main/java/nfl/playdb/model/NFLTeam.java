@@ -1,7 +1,7 @@
 package nfl.playdb.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Optional;
 
 public enum NFLTeam {
 
@@ -42,18 +42,10 @@ public enum NFLTeam {
 	private String name;
 	private String abbrev;
 
-	private static final Map<String, NFLTeam> abbrevToTeam = new HashMap<>(32);
-
 	private NFLTeam(final String city, final String name, final String abbrev) {
 		this.city = city;
 		this.name = name;
 		this.abbrev = abbrev;
-
-		addToAbbrevMap(abbrev, this);
-	}
-
-	private static void addToAbbrevMap(final String abbrev, final NFLTeam team) {
-		abbrevToTeam.put(abbrev, team);
 	}
 
 	public String getCity() {
@@ -69,6 +61,8 @@ public enum NFLTeam {
 	}
 
 	public static NFLTeam fromAbbrev(final String abbrev) {
-		return abbrevToTeam.get(abbrev);
+		final Optional<NFLTeam> result = Arrays.stream(values())
+				.filter((team) -> team.getAbbrev().equals(abbrev)).findAny();
+		return result.isPresent() ? result.get() : null;
 	}
 }
