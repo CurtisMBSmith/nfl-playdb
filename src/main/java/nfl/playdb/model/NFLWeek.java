@@ -3,6 +3,8 @@ package nfl.playdb.model;
 import static nfl.playdb.constant.NFLDataConstants.MAX_SEAS;
 import static nfl.playdb.constant.NFLDataConstants.MIN_SEAS;
 
+import java.util.List;
+
 public class NFLWeek implements Comparable<NFLWeek> {
 
 	/**
@@ -13,6 +15,7 @@ public class NFLWeek implements Comparable<NFLWeek> {
 	private int year;
 	private int weekNum;
 	private final WeekType type;
+	private List<Matchup> matchups;
 
 	public NFLWeek(final int year, final int week) {
 		if (year < MIN_SEAS || year > MAX_SEAS) {
