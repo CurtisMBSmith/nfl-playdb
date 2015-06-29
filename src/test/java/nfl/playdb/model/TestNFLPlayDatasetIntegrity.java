@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {NFLPlayDBConfig.class})
-public class TestNFLStadiumDatasetIntegrity {
+public class TestNFLPlayDatasetIntegrity {
 
 	@Autowired
 	private GameDAO gameDAO;
@@ -38,4 +38,17 @@ public class TestNFLStadiumDatasetIntegrity {
 				teamsInDataSet.stream().anyMatch((team) -> NFLTeam.fromAbbrev(team) == null));
 	}
 
+	@Test
+	public void verifyAllWeatherConditionsInDatasetHaveEnumValue() {
+		final List<String> conditionsInDataSet = gameDAO.findDistinctWeatherConditions();
+		assertFalse("One or more weather conditions in dataset doesn't have a corrseponding enum value.",
+				conditionsInDataSet.stream().anyMatch((cond) -> !WeatherCondition.fromString(cond).isPresent()));
+	}
+
+	@Test
+	public void verifyAllWindDirectionsInDatasetHaveEnumValue() {
+		final List<String> directionsInDataSet = gameDAO.findDistinctWindDirections();
+		assertFalse("One or more wind direction in dataset doesn't have a corrseponding enum value.",
+				directionsInDataSet.stream().anyMatch((wdir) -> !WindDirection.fromString(wdir).isPresent()));
+	}
 }
