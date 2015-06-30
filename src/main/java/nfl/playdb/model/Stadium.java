@@ -81,7 +81,7 @@ public enum Stadium {
 
 	public static Stadium fromString(final String stadiumName) {
 		final Optional<Stadium> result = Arrays.stream(values())
-				.filter((stadium) -> Arrays.stream(stadium.getStadiumNames()).anyMatch((name) -> name.equals(stadiumName))).findAny();
+				.filter((stadium) -> Arrays.stream(stadium.getStadiumNames()).anyMatch((name) -> name.equalsIgnoreCase(stadiumName))).findAny();
 		return result.isPresent() ? result.get() : null;
 	}
 }

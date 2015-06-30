@@ -41,7 +41,7 @@ public enum WeatherCondition {
 
 	public static Optional<WeatherCondition> fromString(final String cond) {
 		final Optional<WeatherCondition> result = Arrays.stream(values())
-				.filter((condition) -> condition.getName().equals(cond)).findAny();
+				.filter((condition) -> condition.getName().equalsIgnoreCase(cond)).findAny();
 		return result;
 	}
 }

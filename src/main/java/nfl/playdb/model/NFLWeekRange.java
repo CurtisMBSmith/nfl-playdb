@@ -1,29 +1,11 @@
 package nfl.playdb.model;
 
-import static nfl.playdb.model.NFLWeek.afterEndOfData;
-import static nfl.playdb.model.NFLWeek.beforeStartOfData;
-import static nfl.playdb.model.NFLWeek.firstWeekOfData;
-import static nfl.playdb.model.NFLWeek.lastWeekOfData;
-
 public class NFLWeekRange {
 
 	private final NFLWeek start;
 	private final NFLWeek end;
 
-	public NFLWeekRange(NFLWeek start, NFLWeek end) {
-		if (beforeStartOfData(start)) {
-			start = firstWeekOfData();
-		}
-		if (beforeStartOfData(end)) {
-			end = firstWeekOfData();
-		}
-		if (afterEndOfData(start)) {
-			start = lastWeekOfData();
-		}
-		if (afterEndOfData(end)) {
-			end = lastWeekOfData();
-		}
-
+	public NFLWeekRange(final NFLWeek start, final NFLWeek end) {
 		this.start = start;
 		this.end = end;
 

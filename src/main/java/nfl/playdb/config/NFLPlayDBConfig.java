@@ -23,7 +23,7 @@ import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("nfl.playdb.dao")
+@ComponentScan(basePackages = {"nfl.playdb.dao", "nfl.playdb.builders"})
 @PropertySource(value={"file:config/playdb/playdb.properties"})
 @EnableTransactionManagement
 public abstract class NFLPlayDBConfig {

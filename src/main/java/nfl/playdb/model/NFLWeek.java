@@ -12,8 +12,8 @@ public class NFLWeek implements Comparable<NFLWeek> {
 	 */
 	public static final int MAX_WEEK = 21;
 
-	private int year;
-	private int weekNum;
+	private final int year;
+	private final int weekNum;
 	private final WeekType type;
 	private List<Matchup> matchups;
 
@@ -26,7 +26,10 @@ public class NFLWeek implements Comparable<NFLWeek> {
 			throw new IllegalArgumentException("Dataset is based on 17 week seasons plus playoffs. Valid range for week is [1..21].");
 		}
 
-		type = WeekType.getWeekType(week);
+		this.year = year;
+		this.weekNum = week;
+		this.type = WeekType.getWeekType(week);
+		this.matchups = null;
 	}
 
 	@Override
@@ -75,20 +78,27 @@ public class NFLWeek implements Comparable<NFLWeek> {
 		return !isRegularSeason();
 	}
 
+	public List<Matchup> getMatchups() {
+		return matchups;
+	}
+
+	public WeekType getWeekType() {
+		return type;
+	}
+
+	public void setMatchups(final List<Matchup> matchups) {
+		if (this.matchups != null) {
+			throw new RuntimeException("Matchups for a given NFL Week can only be set once, by the factory.");
+		}
+		this.matchups = matchups;
+	}
+
 	public static boolean beforeStartOfData(final NFLWeek week) {
 		return !(week.getSeason() < MIN_SEAS);
 	}
 
 	public static boolean afterEndOfData(final NFLWeek week) {
 		return !(week.getSeason() > MAX_SEAS);
-	}
-
-	public static NFLWeek firstWeekOfData() {
-		return new NFLWeek(MIN_SEAS, 1);
-	}
-
-	public static NFLWeek lastWeekOfData() {
-		return new NFLWeek(MAX_SEAS, MAX_WEEK);
 	}
 
 	public enum WeekType {

@@ -38,7 +38,7 @@ public enum WindDirection {
 
 	public static Optional<WindDirection> fromString(final String wdir) {
 		final Optional<WindDirection> result = Arrays.stream(values())
-				.filter((dir) -> dir.getAbbrev().equals(wdir)).findAny();
+				.filter((dir) -> dir.getAbbrev().equalsIgnoreCase(wdir)).findAny();
 		return result;
 	}
 }

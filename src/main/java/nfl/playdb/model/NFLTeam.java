@@ -62,7 +62,7 @@ public enum NFLTeam {
 
 	public static NFLTeam fromAbbrev(final String abbrev) {
 		final Optional<NFLTeam> result = Arrays.stream(values())
-				.filter((team) -> team.getAbbrev().equals(abbrev)).findAny();
+				.filter((team) -> team.getAbbrev().equalsIgnoreCase(abbrev)).findAny();
 		return result.isPresent() ? result.get() : null;
 	}
 }
