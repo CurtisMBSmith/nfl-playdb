@@ -11,8 +11,8 @@ import nfl.playdb.model.Weather;
 import nfl.playdb.model.WeatherCondition;
 import nfl.playdb.model.WindDirection;
 import nfl.playdb.model.gen.jooq.tables.Game;
+import nfl.playdb.model.gen.jooq.tables.records.GameRecord;
 
-import org.jooq.Record;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -39,8 +39,8 @@ public class GameDAO extends PlayDBDAO<Game> {
 
 	public List<Matchup> retrieveMatchupsForWeek(final NFLWeek week) {
 		final List<Matchup> matchups = new LinkedList<>();
-		dslCtx.select(table().fields())
-				.from(table())
+		dslCtx.selectFrom(table())
+//				.from(table())
 				.where(table().SEAS.eq(week.getSeason()), table().WK.eq((byte) week.getWeek()))
 //				.fetch().forEach(record -> record.);
 				.fetch().stream().forEach(record -> matchups.add(toMatchup(record, week)));
@@ -48,21 +48,21 @@ public class GameDAO extends PlayDBDAO<Game> {
 		return matchups;
 	}
 
-	private Matchup toMatchup(final Record record, final NFLWeek week) {
+	private Matchup toMatchup(final GameRecord record, final NFLWeek week) {
 		final Matchup matchup = new Matchup(
-				NFLTeam.fromAbbrev(record.getValue(table().H)),
-				NFLTeam.fromAbbrev(record.getValue(table().V)),
+				NFLTeam.fromAbbrev(record.getH()),
+				NFLTeam.fromAbbrev(record.getV()),
 				week,
-				Stadium.fromString(record.getValue(table().STAD)),
+				Stadium.fromString(record.getStad()),
 				new Weather(
-						record.getValue(table().TEMP),
-						record.getValue(table().HUMD),
-						record.getValue(table().WSPD),
-						WindDirection.fromString(record.getValue(table().WDIR)),
-						WeatherCondition.fromString(record.getValue(table().COND))
+						record.getTemp(),
+						record.getHumd(),
+						record.getWspd(),
+						WindDirection.fromString(record.getWdir()),
+						WeatherCondition.fromString(record.getCond())
 				),
-				record.getValue(table().OU).intValue(),
-				record.getValue(table().SPRV).doubleValue()
+				record.getOu().intValue(),
+				record.getSprv().doubleValue()
 		);
 
 		return matchup;
